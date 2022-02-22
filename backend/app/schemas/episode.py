@@ -1,21 +1,15 @@
 from typing import List
 
-from pydantic import BaseModel
+from app.schemas.base import EpisodeBase, CharacterBase
 
 
-class EpisodeBase(BaseModel):
-    name: str
-    air_date: str
-    segment: str
-    characters: List[int]
+class EpisodeSchema(EpisodeBase):
+    characters: List[CharacterBase]
 
 
-class EpisodeCreate(EpisodeBase):
+class EpisodeCreate(EpisodeSchema):
     pass
 
 
-class Episode(EpisodeBase):
+class Episode(EpisodeSchema):
     id: int
-
-    class Config:
-        orm_mode = True

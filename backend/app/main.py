@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from app.api.router import api_router
 from app.core.config import settings
 
 
@@ -9,8 +10,4 @@ def get_application():
 
 
 app = get_application()
-
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+app.include_router(api_router)
