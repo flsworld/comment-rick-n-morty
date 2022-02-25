@@ -1,5 +1,3 @@
-from typing import List
-
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
@@ -10,7 +8,7 @@ from app.api import deps
 router = APIRouter()
 
 
-@router.get("/", response_model=List[schemas.Character])
+@router.get("/", response_model=list[schemas.Character])
 def read_characters(skip: int = 0, limit: int = 100, db: Session = Depends(deps.get_db)):
     characters = crud.get_multi_characters(db, skip=skip, limit=limit)
     return characters

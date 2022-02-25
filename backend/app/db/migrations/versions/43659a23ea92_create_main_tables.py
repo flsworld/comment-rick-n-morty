@@ -37,10 +37,9 @@ def create_episode_table() -> None:
 
 def create_association_table() -> None:
     op.create_table(
-        "appearance",
-        sa.Column("id", sa.Integer, primary_key=True),
-        sa.Column("character_id", sa.Integer, nullable=False),
-        sa.Column("episode_id", sa.Integer, nullable=False),
+        "character_episode",
+        sa.Column("character_id", sa.Integer, primary_key=True),
+        sa.Column("episode_id", sa.Integer, primary_key=True),
     )
 
 
@@ -53,4 +52,4 @@ def upgrade() -> None:
 def downgrade() -> None:
     op.drop_table("character")
     op.drop_table("episode")
-    op.drop_table("appearance")
+    op.drop_table("character_episode")

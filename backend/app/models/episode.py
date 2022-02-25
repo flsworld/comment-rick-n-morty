@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
 from app.db.session import Base
 
@@ -10,3 +11,9 @@ class Episode(Base):
     name = Column(String, unique=True)
     air_date = Column(String)
     segment = Column(String, unique=True)
+
+    characters = relationship("Character", secondary="character_episode", back_populates='episodes')
+    # characters = relationship("CharacterEpisode", back_populates='episode')
+
+    def __repr__(self):
+        return 'Episode(%s)' % repr(self.name)

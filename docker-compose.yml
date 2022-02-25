@@ -9,10 +9,6 @@ services:
       - "5432:5432"
     env_file:
       - ./backend/.env
-    environment:
-      - POSTGRES_USER=friedrich
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=postgres
 
   web:
     build: backend/

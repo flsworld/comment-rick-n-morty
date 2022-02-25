@@ -1,14 +1,9 @@
-from sqlalchemy import Column, Integer, String, Table, ForeignKey
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import relationship
 
 from app.db.session import Base
-
-appearance_association = Table(
-    "appearance",
-    Base.metadata,
-    Column("character_id", Integer(), ForeignKey("character.id"), primary_key=True),
-    Column("episode_id", Integer(), ForeignKey("episode.id"), primary_key=True),
-)
+from app.models import CharacterEpisode
 
 
 class Character(Base):
@@ -21,6 +16,11 @@ class Character(Base):
     type = Column(String)
     gender = Column(String)
 
-    episodes = relationship(
-        "Episode", secondary=appearance_association, backref="characters"
+    association_ids = association_proxy(
+        "association_recs",
+        "episode_id",
+        creator=lambda eid: CharacterEpisode(episode_id=eid),
     )
+
+    episodes = relationship("Episode", secondary="character_episode", back_populates='characters')
+    # episodes = relationship("CharacterEpisode", back_populates="character")

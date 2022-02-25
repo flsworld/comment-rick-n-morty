@@ -14,7 +14,7 @@ def init_db(db: Session) -> None:
     path = settings.FIXTURES_PATH
     for filename in os.listdir(path):
         logger.info(filename)
-        with open(os.path.join(path, filename), "r") as f:  # open in readonly mode
+        with open(os.path.join(path, filename), "r") as f:
             fixtures = json.load(f)
             for f in fixtures:
                 if "character" in filename:
@@ -26,8 +26,7 @@ def init_db(db: Session) -> None:
                         type=f.get("type"),
                         gender=f.get("gender"),
                     )
-                    values = [(f.get("id"), eid) for eid in f.get("episode")]
-                    db.execute(models.appearance_association.insert().values(values))
+                    db_obj.association_ids.extend(f.get("episode"))
                 elif "episode" in filename:
                     db_obj = models.Episode(
                         id=f.get("id"),

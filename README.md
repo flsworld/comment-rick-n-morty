@@ -17,4 +17,8 @@ PYTHONPATH=/backend
 
 `python app/initial_data.py`
 
+`psql -h localhost -U user --dbname=dbname`
+
+`SELECT * FROM character_episode;`
+
 

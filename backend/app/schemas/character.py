@@ -1,10 +1,12 @@
-from typing import List
-
 from app.schemas.base import CharacterBase, EpisodeBase
 
 
 class CharacterSchema(CharacterBase):
-    episodes: List[EpisodeBase]
+    episodes: list[EpisodeBase]
+    # episodes: list[int] = Field(alias="char_episodes")
+    #
+    # class Config:
+    #     allow_population_by_field_name = True
 
 
 class CharacterCreate(CharacterSchema):
@@ -13,3 +15,6 @@ class CharacterCreate(CharacterSchema):
 
 class Character(CharacterSchema):
     id: int
+
+    class Config:
+        orm_mode = True
