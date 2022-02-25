@@ -14,9 +14,5 @@ class CharacterEpisode(Base):
     comment = relationship("Comment", backref="association_recs")
     # character = relationship("Character", backref="association_recs")
 
-    # character = relationship("Character", back_populates="episodes")
-    # episode = relationship("Episode", back_populates="characters")
-
-    # # proxies
-    # char_episodes = association_proxy(target_collection="character", attr="episodes")
-    # epi_characters = association_proxy(target_collection="episode", attr="characters")
+    character = relationship("Character", back_populates="episodes")
+    episode = relationship("Episode", back_populates="characters")

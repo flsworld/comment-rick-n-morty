@@ -22,5 +22,22 @@ class Character(Base):
         creator=lambda eid: CharacterEpisode(episode_id=eid),
     )
 
-    episodes = relationship("Episode", secondary="character_episode", back_populates='characters')
-    # episodes = relationship("CharacterEpisode", back_populates="character")
+    # episodes = relationship("Episode", secondary="character_episode", back_populates='characters')
+
+    episodes = relationship("CharacterEpisode", back_populates="character")
+
+    # @property
+    # def episodes(self):
+    #     s = """
+    #         SELECT temp.* FROM (
+    #             SELECT
+    #                 episode.*,
+    #                 character_episode.comment_id,
+    #                 character_episode.character_id
+    #             FROM episode INNER JOIN character_episode ON episode.id = character_episode.episode_id
+    #         ) AS temp
+    #         INNER JOIN character ON temp.character_id = character.id
+    #         WHERE character.id = :charid
+    #         """
+    #     result = object_session(self).execute(s, params={"charid": self.id}).fetchall()
+    #     return result

@@ -12,8 +12,9 @@ class Episode(Base):
     air_date = Column(String)
     segment = Column(String, unique=True)
 
-    characters = relationship("Character", secondary="character_episode", back_populates='episodes')
-    # characters = relationship("CharacterEpisode", back_populates='episode')
+    # characters = relationship("Character", secondary="character_episode", back_populates='episodes')
+
+    characters = relationship("CharacterEpisode", back_populates='episode')
 
     def __repr__(self):
         return 'Episode(%s)' % repr(self.name)
