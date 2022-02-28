@@ -1,3 +1,3 @@
 from .character import Character
-from .comment import Comment, CommentCreate
+from .comment import Comment, CommentCreate, CommentUpdate
 from .episode import Episode
