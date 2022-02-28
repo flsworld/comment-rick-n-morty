@@ -31,6 +31,8 @@ def create_comment_table() -> None:
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("text", sa.Text),
         sa.Column("user_id", sa.Integer),
+        sa.Column("character_id", sa.Integer),
+        sa.Column("episode_id", sa.Integer),
     )
 
 

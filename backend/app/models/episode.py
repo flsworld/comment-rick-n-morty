@@ -15,6 +15,7 @@ class Episode(Base):
     # characters = relationship("Character", secondary="character_episode", back_populates='episodes')
 
     characters = relationship("CharacterEpisode", back_populates='episode')
+    comments = relationship("Comment", back_populates="episode")
 
     def __repr__(self):
         return 'Episode(%s)' % repr(self.name)
