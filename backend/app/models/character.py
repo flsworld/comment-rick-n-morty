@@ -16,13 +16,13 @@ class Character(Base):
     type = Column(String)
     gender = Column(String)
 
-    association_ids = association_proxy(
-        "association_recs",
-        "episode_id",
-        creator=lambda eid: CharacterEpisode(episode_id=eid),
-    )
-
     # episodes = relationship("Episode", secondary="character_episode", back_populates='characters')
 
     episodes = relationship("CharacterEpisode", back_populates="character")
     comments = relationship("Comment", back_populates="character")
+
+    association_ids = association_proxy(
+        "episodes",
+        "episode_id",
+        creator=lambda eid: CharacterEpisode(episode_id=eid),
+    )

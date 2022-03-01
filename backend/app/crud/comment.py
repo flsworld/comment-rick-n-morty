@@ -1,7 +1,8 @@
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
-from app import models, schemas
+from app import models
+from app.schemas.comment import CommentCreate, CommentUpdate
 
 
 def get_comment(db: Session, pk: int):
@@ -12,7 +13,7 @@ def get_multi_comments(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Comment).offset(skip).limit(limit).all()
 
 
-def create_comment(db: Session, comment_in: schemas.CommentCreate):
+def create_comment(db: Session, comment_in: CommentCreate):
     db_comment = models.Comment(**comment_in.dict())
     db.add(db_comment)
     db.commit()
@@ -24,7 +25,7 @@ def update_comment(
         db: Session,
         *,
         db_obj: models.Comment,
-        comment_in: schemas.CommentUpdate
+        comment_in: CommentUpdate
 ):
     obj_data = jsonable_encoder(db_obj)
     update_data = comment_in.dict(exclude_unset=True)

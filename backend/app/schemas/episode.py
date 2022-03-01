@@ -1,7 +1,9 @@
-from typing import List, Optional, Any
+from typing import List, Any, Optional
 
 from pydantic import BaseModel
 from pydantic.utils import GetterDict
+
+from app.schemas.comment import CommentBase
 
 
 class EpisodeCharacterGetter(GetterDict):
@@ -15,7 +17,7 @@ class EpisodeCharacterGetter(GetterDict):
 class EpisodeCharacterSchema(BaseModel):
     id: int
     name: str
-    comment_id: Optional[int]
+    comments: Optional[list[CommentBase]] = None
 
     class Config:
         orm_mode = True
@@ -26,6 +28,7 @@ class EpisodeSchema(BaseModel):
     name: str
     air_date: str
     segment: str
+    comments: list[CommentBase]
     characters: List[EpisodeCharacterSchema]
 
     class Config:

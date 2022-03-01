@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy import Column, ForeignKey, Integer, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 from app.db.session import Base
@@ -7,12 +7,15 @@ from app.db.session import Base
 class CharacterEpisode(Base):
     __tablename__ = "character_episode"
 
-    character_id = Column(Integer, ForeignKey("character.id"), primary_key=True)
-    episode_id = Column(Integer, ForeignKey("episode.id"), primary_key=True)
+    id = Column(Integer, primary_key=True, index=True)
+    character_id = Column(Integer, ForeignKey("character.id"))
+    episode_id = Column(Integer, ForeignKey("episode.id"))
     comment_id = Column(Integer, ForeignKey("comment.id"))
 
-    comment = relationship("Comment", backref="association_recs")
-    # character = relationship("Character", backref="association_recs")
-
+    comment = relationship("Comment", backref="comments")
     character = relationship("Character", back_populates="episodes")
     episode = relationship("Episode", back_populates="characters")
+
+    __table_args__ = (
+        UniqueConstraint("character_id", "episode_id", name="_character_episode_uc"),
+    )

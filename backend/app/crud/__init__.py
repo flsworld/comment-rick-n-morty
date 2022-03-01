@@ -1,4 +1,5 @@
-from .character import get_multi_characters
+from .appearance import get_appearance, create_appearance, update_appearance, remove_appearance
+from .character import get_character, get_multi_characters
 from .comment import (
     get_multi_comments,
     create_comment,
@@ -6,4 +7,4 @@ from .comment import (
     update_comment,
     remove_comment,
 )
-from .episode import get_multi_episodes
+from .episode import get_episode, get_multi_episodes

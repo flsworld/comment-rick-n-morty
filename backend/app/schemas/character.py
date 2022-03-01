@@ -3,6 +3,8 @@ from typing import Any, Optional
 from pydantic import BaseModel
 from pydantic.utils import GetterDict
 
+from app.schemas.comment import CommentBase
+
 
 class CharacterEpisodeGetter(GetterDict):
     def get(self, key: str, default: Any = None) -> Any:
@@ -15,7 +17,7 @@ class CharacterEpisodeGetter(GetterDict):
 class CharacterEpisodeSchema(BaseModel):
     id: int
     name: str
-    comment_id: Optional[int]
+    comments: Optional[list[CommentBase]] = None
 
     class Config:
         orm_mode = True
@@ -28,6 +30,7 @@ class CharacterSchema(BaseModel):
     species: str
     type: str
     gender: str
+    comments: Optional[list[CommentBase]] = None
     episodes: list[CharacterEpisodeSchema]
 
     class Config:

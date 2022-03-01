@@ -2,35 +2,35 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app import crud
-from app import schemas
 from app.api import deps
+from app.schemas.comment import Comment, CommentUpdate, CommentCreate
 
 router = APIRouter()
 
 
-@router.get("/", response_model=list[schemas.Comment])
+@router.get("/", response_model=list[Comment])
 def read_comments(db: Session = Depends(deps.get_db), skip: int = 0, limit: int = 100):
     comments = crud.get_multi_comments(db, skip=skip, limit=limit)
     return comments
 
 
-@router.post("/", response_model=schemas.Comment)
+@router.post("/", response_model=Comment)
 def create_comment(
     *,
     db: Session = Depends(deps.get_db),
-    comment_in: schemas.CommentCreate,
+    comment_in: CommentCreate,
     # current_user: models.User
 ):
-    comments = crud.create_comment(db, comment_in=comment_in)
-    return comments
+    comment = crud.create_comment(db, comment_in=comment_in)
+    return comment
 
 
-@router.put("/{comment_id}", response_model=schemas.Comment)
+@router.put("/{comment_id}", response_model=Comment)
 def update_comment(
     *,
     db: Session = Depends(deps.get_db),
     comment_id: int,
-    comment_in: schemas.CommentUpdate,
+    comment_in: CommentUpdate,
 ):
     """
     Update a comment.
@@ -45,7 +45,7 @@ def update_comment(
     return comment
 
 
-@router.delete("/{comment_id}", response_model=schemas.Comment)
+@router.delete("/{comment_id}", response_model=Comment)
 def delete_comment(
     *,
     db: Session = Depends(deps.get_db),

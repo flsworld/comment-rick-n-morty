@@ -3,14 +3,21 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class CommentSchema(BaseModel):
+class CommentBase(BaseModel):
+    user_id: int
     text: str
+
+    class Config:
+        orm_mode = True
+
+
+class CommentSchema(CommentBase):
     character_id: Optional[int] = None
     episode_id: Optional[int] = None
 
 
 class CommentCreate(CommentSchema):
-    user_id: int
+    pass
 
 
 class CommentUpdate(CommentSchema):
@@ -19,7 +26,3 @@ class CommentUpdate(CommentSchema):
 
 class Comment(CommentSchema):
     id: int
-    user_id: int
-
-    class Config:
-        orm_mode = True

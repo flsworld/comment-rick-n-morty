@@ -38,8 +38,9 @@ def create_episode_table() -> None:
 def create_association_table() -> None:
     op.create_table(
         "character_episode",
-        sa.Column("character_id", sa.Integer, primary_key=True),
-        sa.Column("episode_id", sa.Integer, primary_key=True),
+        sa.Column("id", sa.Integer, primary_key=True),
+        sa.Column("character_id", sa.Integer),
+        sa.Column("episode_id", sa.Integer),
     )
 
 
