@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.orm import relationship
 
 from app.db.session import Base
@@ -9,7 +9,7 @@ class Episode(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True)
-    air_date = Column(String)
+    air_date = Column(Date)
     segment = Column(String, unique=True)
 
     # characters = relationship("Character", secondary="character_episode", back_populates='episodes')

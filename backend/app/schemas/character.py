@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel
 from pydantic.utils import GetterDict
 
 from app.schemas.comment import CommentBase
@@ -32,12 +32,6 @@ class CharacterSchema(BaseModel):
     gender: str
     comments: Optional[list[CommentBase]] = None
     episodes: list[CharacterEpisodeSchema]
-
-    @validator("status")
-    def unknown_status_value(cls, v):
-        if v.lower() not in ("unknown", "dead", "alive"):
-            raise ValueError('value must be in {"unknown", "dead", "alive"}')
-        return v
 
     class Config:
         orm_mode = True

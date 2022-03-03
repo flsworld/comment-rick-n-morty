@@ -30,7 +30,7 @@ def create_episode_table() -> None:
         "episode",
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("name", sa.Text, nullable=False),
-        sa.Column("air_date", sa.Text, nullable=False),
+        sa.Column("air_date", sa.Date, nullable=False),
         sa.Column("segment", sa.Text, nullable=False),
     )
 

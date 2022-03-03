@@ -1,6 +1,8 @@
+import re
+from datetime import date
 from typing import List, Any, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from pydantic.utils import GetterDict
 
 from app.schemas.comment import CommentBase
@@ -26,7 +28,7 @@ class EpisodeCharacterSchema(BaseModel):
 
 class EpisodeSchema(BaseModel):
     name: str
-    air_date: str
+    air_date: date
     segment: str
     comments: list[CommentBase]
     characters: List[EpisodeCharacterSchema]
@@ -41,3 +43,19 @@ class EpisodeCreate(EpisodeSchema):
 
 class Episode(EpisodeSchema):
     id: int
+
+
+class EpisodeSearch(BaseModel):
+    air_date__lte: Optional[date] = None
+    air_date__gte: Optional[date] = None
+    segment: Optional[str] = None
+    name__icontains: Optional[str] = None
+
+    @validator("segment")
+    def forbidden_segment_value(cls, v):
+        if not v:
+            return None
+        match = re.match(r"[sS]0[1-4][eE][0-1]\d", v)
+        if not match:
+            raise ValueError("value not accepted")
+        return v

@@ -7,4 +7,4 @@ from .comment import (
     update_comment,
     remove_comment,
 )
-from .episode import get_episode, get_multi_episodes
+from .episode import get_episode, get_multi_episodes, search_episodes

@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+from datetime import datetime
 
 from sqlalchemy.orm import Session
 
@@ -28,10 +29,11 @@ def init_db(db: Session) -> None:
                     )
                     db_obj.association_ids.extend(f.get("episode"))
                 elif "episode" in filename:
+                    air_date = datetime.strptime(f.get("air_date"), "%B %d, %Y")
                     db_obj = models.Episode(
                         id=f.get("id"),
                         name=f.get("name"),
-                        air_date=f.get("air_date"),
+                        air_date=air_date,
                         segment=f.get("episode"),
                     )
                 db.add(db_obj)
