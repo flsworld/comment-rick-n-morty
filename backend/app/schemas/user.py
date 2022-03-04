@@ -7,11 +7,3 @@ class UserSchema(BaseModel):
 
 class UserCreate(UserSchema):
     pass
-
-
-class Character(UserSchema):
-    id: int
-    comments: list[int] = []
-
-    class Config:
-        orm_mode = True

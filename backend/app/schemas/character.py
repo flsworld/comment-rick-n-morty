@@ -30,8 +30,8 @@ class CharacterSchema(BaseModel):
     species: str
     type: str
     gender: str
-    comments: Optional[list[CommentBase]] = None
-    episodes: list[CharacterEpisodeSchema]
+    comments: list[CommentBase] = []
+    episodes: list[CharacterEpisodeSchema] = []
 
     class Config:
         orm_mode = True

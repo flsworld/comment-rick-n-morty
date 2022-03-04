@@ -1,6 +1,6 @@
 import re
 from datetime import date
-from typing import List, Any, Optional
+from typing import Any, Optional
 
 from pydantic import BaseModel, validator
 from pydantic.utils import GetterDict
@@ -30,8 +30,8 @@ class EpisodeSchema(BaseModel):
     name: str
     air_date: date
     segment: str
-    comments: list[CommentBase]
-    characters: List[EpisodeCharacterSchema]
+    comments: list[CommentBase] = []
+    characters: list[EpisodeCharacterSchema] = []
 
     class Config:
         orm_mode = True

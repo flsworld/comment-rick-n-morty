@@ -7,4 +7,8 @@ databases[postgresql]==0.4.2
 alembic==1.4.2
 psycopg2-binary==2.9.3
 
+pytest==7.0.1
+requests==2.27.1  # starlette got a ModuleNotFoundError for testclient
+faker==13.3.0
+
 ipdb==0.13.9
