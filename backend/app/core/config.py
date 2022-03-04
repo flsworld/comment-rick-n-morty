@@ -5,7 +5,7 @@ from starlette.config import Config
 
 class Settings(BaseSettings):
     config = Config(".env")
-    PROJECT_NAME = "comment R&M"
+    PROJECT_NAME = "Commentez Rick & Morty"
     VERSION = "1.0.0"
     API_PREFIX = "/api"
 

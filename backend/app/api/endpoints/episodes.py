@@ -11,13 +11,13 @@ router = APIRouter()
 
 @router.get("/{episode_id}", response_model=schemas.Character)
 def read_episode(*, db: Session = Depends(deps.get_db), episode_id: int):
-    episode = crud.get_episode(db, episode_id)
+    episode = crud.episode.get(db, episode_id)
     return episode
 
 
 @router.get("/", response_model=list[schemas.Episode])
 def read_episodes(skip: int = 0, limit: int = 100, db: Session = Depends(deps.get_db)):
-    episodes = crud.get_multi_episodes(db, skip=skip, limit=limit)
+    episodes = crud.episode.get_multi(db, skip=skip, limit=limit)
     return episodes
 
 
@@ -29,5 +29,5 @@ def search_episodes(
     skip: int = 0,
     limit: int = 100
 ):
-    episodes = crud.search_episodes(db, obj_in, skip=skip, limit=limit)
+    episodes = crud.episode.search(db, obj_in, skip=skip, limit=limit)
     return episodes

@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.get("/", response_model=list[Comment])
 def read_comments(db: Session = Depends(deps.get_db), skip: int = 0, limit: int = 100):
-    comments = crud.get_multi_comments(db, skip=skip, limit=limit)
+    comments = crud.comment.get_multi(db, skip=skip, limit=limit)
     return comments
 
 
@@ -21,7 +21,7 @@ def create_comment(
     comment_in: CommentCreate,
     # current_user: models.User
 ):
-    comment = crud.create_comment(db, comment_in=comment_in)
+    comment = crud.comment.create(db, comment_in=comment_in)
     return comment
 
 
@@ -35,13 +35,13 @@ def update_comment(
     """
     Update a comment.
     """
-    comment = crud.get_comment(db, pk=comment_id)
+    comment = crud.comment.get(db, pk=comment_id)
     if not comment:
         raise HTTPException(
             status_code=404,
             detail="Comment not found",
         )
-    comment = crud.update_comment(db, db_obj=comment, comment_in=comment_in)
+    comment = crud.comment.update(db, db_obj=comment, comment_in=comment_in)
     return comment
 
 
@@ -54,11 +54,11 @@ def delete_comment(
     """
     Delete a comment.
     """
-    comment = crud.get_comment(db, pk=comment_id)
+    comment = crud.comment.get(db, pk=comment_id)
     if not comment:
         raise HTTPException(
             status_code=404,
             detail="Comment not found",
         )
-    comment = crud.remove_comment(db, pk=comment_id)
+    comment = crud.comment.remove(db, pk=comment_id)
     return comment

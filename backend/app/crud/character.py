@@ -2,33 +2,35 @@ from typing import Optional
 
 from sqlalchemy.orm import Session
 
-from app import models
+from app.crud.base import CRUDBase
+from app.models import Character
 
 
-def get_character(db: Session, pk: int):
-    return db.query(models.Character).get(pk)
+class CRUDCharacter(CRUDBase):
+    def get_multi_characters(
+        self,
+        db: Session,
+        skip: int = 0,
+        limit: int = 100,
+        status: Optional[str] = None,
+        species: Optional[str] = None,
+        gender: Optional[str] = None,
+    ):
+        criterion = []
+        if status:
+            criterion.append(self.model.status == status)
+        if species:
+            criterion.append(self.model.species == species)
+        if gender:
+            criterion.append(self.model.gender == gender)
+
+        return (
+            db.query(self.model)
+            .filter(*criterion)
+            .offset(skip)
+            .limit(limit)
+            .all()
+        )
 
 
-def get_multi_characters(
-    db: Session,
-    skip: int = 0,
-    limit: int = 100,
-    status: Optional[str] = None,
-    species: Optional[str] = None,
-    gender: Optional[str] = None,
-):
-    criterion = []
-    if status:
-        criterion.append(models.Character.status == status)
-    if species:
-        criterion.append(models.Character.species == species)
-    if gender:
-        criterion.append(models.Character.gender == gender)
-
-    return (
-        db.query(models.Character)
-        .filter(*criterion)
-        .offset(skip)
-        .limit(limit)
-        .all()
-    )
+character = CRUDCharacter(Character)

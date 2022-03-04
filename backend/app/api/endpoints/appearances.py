@@ -10,7 +10,7 @@ router = APIRouter()
 
 @router.post("/", response_model=Appearance)
 def create_appearance(*, db: Session = Depends(deps.get_db), obj_in: AppearanceCreate):
-    appearance = crud.create_appearance(db, obj_in=obj_in)
+    appearance = crud.appearance.create(db, obj_in=obj_in)
     return appearance
 
 
@@ -24,13 +24,13 @@ def update_appearance(
     """
     Update an appearance.
     """
-    appearance = crud.get_appearance(db, pk=id)
+    appearance = crud.appearance.get(db, pk=id)
     if not appearance:
         raise HTTPException(
             status_code=404,
             detail="Appearance not found",
         )
-    appearance = crud.update_appearance(db, db_obj=appearance, obj_in=obj_in)
+    appearance = crud.appearance.update(db, db_obj=appearance, obj_in=obj_in)
     return appearance
 
 
@@ -43,11 +43,11 @@ def delete_appearance(
     """
     Delete an appearance.
     """
-    appearance = crud.get_appearance(db, pk=id)
+    appearance = crud.appearance.get(db, pk=id)
     if not appearance:
         raise HTTPException(
             status_code=404,
             detail="Appearance not found",
         )
-    appearance = crud.remove_appearance(db, pk=id)
+    appearance = crud.appearance.remove(db, pk=id)
     return appearance
