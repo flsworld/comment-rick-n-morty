@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 
 class CommentBase(BaseModel):
-    user_id: Optional[int] = None  # default as None as any user concept was introduced
+    user_id: Optional[int] = None  # default as any CRUD user exists at the moment
     text: str
 
     class Config:
@@ -14,14 +14,15 @@ class CommentBase(BaseModel):
 class CommentSchema(CommentBase):
     character_id: Optional[int] = None
     episode_id: Optional[int] = None
+    appearance_id: Optional[int] = None
 
 
 class CommentCreate(CommentSchema):
     pass
 
 
-class CommentUpdate(CommentSchema):
-    pass
+class CommentUpdate(BaseModel):
+    text: str
 
 
 class Comment(CommentSchema):

@@ -60,7 +60,7 @@ def setup(db, fake):
     data = {"text": "Super", "episode_id": 1}
     com_obj = Comment(**data)
     db.add(com_obj)
-    data = {"text": "NSPP"}
+    data = {"text": "NSPP", "appearance_id": 1}
     com_obj = Comment(**data)
     db.add(com_obj)
 
@@ -75,13 +75,13 @@ def setup(db, fake):
     db.commit()
 
     # Use not tested pydantic models here, so it is tested somewhere also
-    # Appearance
+    # Appearance id=2
     data = {
         "episode_id": 1,
         "character_id": 2,
     }
     obj_in = AppearanceCreate(**data)
     crud.appearance.create(db, obj_in)
-    # Comment
+    # Comment id=4
     com_in = CommentCreate(text="Colossal", episode_id=2)
     crud.comment.create(db, com_in)
