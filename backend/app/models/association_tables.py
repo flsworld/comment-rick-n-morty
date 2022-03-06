@@ -7,12 +7,11 @@ from app.db.session import Base
 class CharacterEpisode(Base):
     __tablename__ = "character_episode"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
     character_id = Column(Integer, ForeignKey("character.id"))
     episode_id = Column(Integer, ForeignKey("episode.id"))
-    comment_id = Column(Integer, ForeignKey("comment.id"))
 
-    comment = relationship("Comment", backref="comments")
+    comments = relationship("Comment", back_populates="appearance")
     character = relationship("Character", back_populates="episodes")
     episode = relationship("Episode", back_populates="characters")
 

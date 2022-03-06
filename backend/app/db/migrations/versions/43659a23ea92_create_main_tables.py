@@ -7,7 +7,7 @@ import sqlalchemy as sa
 from alembic import op
 
 # revision identifiers, used by Alembic
-revision = '43659a23ea92'
+revision = "43659a23ea92"
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,6 +41,9 @@ def create_association_table() -> None:
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("character_id", sa.Integer),
         sa.Column("episode_id", sa.Integer),
+    )
+    op.create_unique_constraint(
+        "_character_episode_uc", "character_episode", ["character_id", "episode_id"]
     )
 
 

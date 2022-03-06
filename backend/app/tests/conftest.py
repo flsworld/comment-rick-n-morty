@@ -30,8 +30,3 @@ def client():
 @pytest.fixture()
 def fake():
     return Faker()
-
-
-@pytest.fixture()
-def setup():
-    pass

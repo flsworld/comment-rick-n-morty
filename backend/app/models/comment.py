@@ -12,7 +12,9 @@ class Comment(Base):
     user_id = Column(Integer, ForeignKey("user.id"))
     character_id = Column(Integer, ForeignKey("character.id"))
     episode_id = Column(Integer, ForeignKey("episode.id"))
+    appearance_id = Column(Integer, ForeignKey("character_episode.id"))
 
     user = relationship("User", back_populates="comments")
     character = relationship("Character", back_populates="comments")
     episode = relationship("Episode", back_populates="comments")
+    appearance = relationship("CharacterEpisode", back_populates="comments")

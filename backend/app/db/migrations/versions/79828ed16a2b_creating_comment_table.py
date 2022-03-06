@@ -13,10 +13,6 @@ branch_labels = None
 depends_on = None
 
 
-def alter_assoc_table() -> None:
-    op.add_column("character_episode", sa.Column("comment_id", sa.Integer))
-
-
 def create_user_table() -> None:
     op.create_table(
         "user",
@@ -33,11 +29,11 @@ def create_comment_table() -> None:
         sa.Column("user_id", sa.Integer),
         sa.Column("character_id", sa.Integer),
         sa.Column("episode_id", sa.Integer),
+        sa.Column("appearance_id", sa.Integer),
     )
 
 
 def upgrade() -> None:
-    alter_assoc_table()
     create_user_table()
     create_comment_table()
 
@@ -45,4 +41,3 @@ def upgrade() -> None:
 def downgrade() -> None:
     op.drop_table("user")
     op.drop_table("comment")
-    op.drop_column("character_episode", "comment_id")

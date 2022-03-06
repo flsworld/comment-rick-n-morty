@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 
 class CommentBase(BaseModel):
-    user_id: int
+    user_id: Optional[int] = None  # default as None as any user concept was introduced
     text: str
 
     class Config:
