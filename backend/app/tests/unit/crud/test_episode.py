@@ -17,7 +17,7 @@ def test_get_episode(db, fake):
 
 def test_get_multi_episode(db, fake):
     ep_in = EpisodeCreate(
-        name=fake.bs(), air_date="2022-03-04", segment=random_segment()
+        name="fake.bs()", air_date="2022-03-04", segment=random_segment()
     )
     crud.episode.create(db, ep_in)
     ep_in = EpisodeCreate(

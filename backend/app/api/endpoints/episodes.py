@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app import crud
 from app import schemas
 from app.api import deps
-from app.schemas.episode import EpisodeSearch
+from app.schemas.episode import EpisodeSearch, EpisodeCreate
 
 router = APIRouter()
 
@@ -31,3 +31,13 @@ def search_episodes(
 ):
     episodes = crud.episode.search(db, obj_in, skip=skip, limit=limit)
     return episodes
+
+
+@router.post("/", response_model=schemas.Episode)
+def create_episode(
+    *,
+    db: Session = Depends(deps.get_db),
+    ep_in: EpisodeCreate,
+):
+    episode = crud.episode.create(db, obj_in=ep_in)
+    return episode

@@ -21,7 +21,7 @@ def create_comment(
     comment_in: CommentCreate,
     # current_user: models.User
 ):
-    comment = crud.comment.create(db, comment_in=comment_in)
+    comment = crud.comment.create(db, obj_in=comment_in)
     return comment
 
 
@@ -32,9 +32,6 @@ def update_comment(
     comment_id: int,
     comment_in: CommentUpdate,
 ):
-    """
-    Update a comment.
-    """
     comment = crud.comment.get(db, pk=comment_id)
     if not comment:
         raise HTTPException(
@@ -51,9 +48,6 @@ def delete_comment(
     db: Session = Depends(deps.get_db),
     comment_id: int,
 ):
-    """
-    Delete a comment.
-    """
     comment = crud.comment.get(db, pk=comment_id)
     if not comment:
         raise HTTPException(
