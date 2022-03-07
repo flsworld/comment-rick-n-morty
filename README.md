@@ -88,7 +88,7 @@ terminal, enter the following command
    ```sh
    docker-compose up --build -d
    ```
-4. Documentation should now be accessible at
+4. Documentation with all details about available routes should now be accessible at
    ```
    0.0.0.0:8000/docs
    ```
@@ -130,7 +130,7 @@ Some useful postgres command
 * \d+ - list all tables (relations) in the current database
 * \d character - describe the character table and the associated columns
 
-See if everything's fine (non-empty table) with a raw SQL
+See if everything's fine (non-empty table) with a raw SQL query
 
 ```sql
     SELECT * FROM character_episode;
@@ -148,8 +148,8 @@ To see the coverage, open the following file `backend/htmlcov/index.html`
 with your browser
 
 ### Install pre-commit
-In order to remain focus on logic during development, pre-commit is a useful tool
-upon which we'll be able to install hooks. In this project 
+In order to remain focus on logic during development, pre-commit - a useful tool
+upon which it is able to install hooks - has been used. In this project 
 * black was used to format the code 
 * flake8 was used to check compliance with PEP8
 
