@@ -10,7 +10,7 @@ from app.schemas.episode import EpisodeSearch
         {"segment": "Z01i04"},
         {"segment": "S11E04"},
         {"segment": "S01E24"},
-     ],
+    ],
 )
 def test_segment_validator(test_input):
     with pytest.raises(ValidationError):

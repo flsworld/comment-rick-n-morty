@@ -27,7 +27,7 @@ def search_episodes(
     db: Session = Depends(deps.get_db),
     obj_in: EpisodeSearch,
     skip: int = 0,
-    limit: int = 100
+    limit: int = 100,
 ):
     episodes = crud.episode.search(db, obj_in, skip=skip, limit=limit)
     return episodes

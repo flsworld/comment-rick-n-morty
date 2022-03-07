@@ -9,4 +9,6 @@ api_router = APIRouter()
 api_router.include_router(characters_router, prefix="/characters", tags=["characters"])
 api_router.include_router(episodes_router, prefix="/episodes", tags=["episodes"])
 api_router.include_router(comments_router, prefix="/comments", tags=["comments"])
-api_router.include_router(appearances_router, prefix="/appearances", tags=["appearances"])
+api_router.include_router(
+    appearances_router, prefix="/appearances", tags=["appearances"]
+)

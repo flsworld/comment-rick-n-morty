@@ -14,9 +14,7 @@ class Episode(Base):
     air_date = Column(Date)
     segment = Column(String, unique=True)
 
-    # characters = relationship("Character", secondary="character_episode", back_populates='episodes')
-
-    characters = relationship("CharacterEpisode", back_populates='episode')
+    characters = relationship("CharacterEpisode", back_populates="episode")
     comments = relationship("Comment", back_populates="episode")
 
     association_ids = association_proxy(

@@ -24,13 +24,7 @@ class CRUDCharacter(CRUDBase):
         if gender:
             criterion.append(self.model.gender == gender)
 
-        return (
-            db.query(self.model)
-            .filter(*criterion)
-            .offset(skip)
-            .limit(limit)
-            .all()
-        )
+        return db.query(self.model).filter(*criterion).offset(skip).limit(limit).all()
 
 
 character = CRUDCharacter(Character)

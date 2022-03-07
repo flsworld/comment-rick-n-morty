@@ -16,8 +16,6 @@ class Character(Base):
     type = Column(String)
     gender = Column(String)
 
-    # episodes = relationship("Episode", secondary="character_episode", back_populates='characters')
-
     episodes = relationship("CharacterEpisode", back_populates="character")
     comments = relationship("Comment", back_populates="character")
 

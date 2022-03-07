@@ -9,7 +9,9 @@ router = APIRouter()
 
 
 @router.get("/", response_model=Appearance)
-def get_appearance(*, db: Session = Depends(deps.get_db), character_id: int, episode_id: int):
+def get_appearance(
+    *, db: Session = Depends(deps.get_db), character_id: int, episode_id: int
+):
     appearance = crud.appearance.get_from_assoc(db, character_id, episode_id)
     if not appearance:
         raise HTTPException(

@@ -6,7 +6,11 @@ from app.schemas import CharacterCreate
 
 def test_get_character(db):
     char_in = CharacterCreate(
-        name="fake.name()", status="Alive", species="Human", type="Volunteer", gender="Male"
+        name="fake.name()",
+        status="Alive",
+        species="Human",
+        type="Volunteer",
+        gender="Male",
     )
     char = crud.character.create(db, char_in)
 
@@ -15,11 +19,19 @@ def test_get_character(db):
 
 def test_get_multi_character(db):
     char_in = CharacterCreate(
-        name="fake.name()", status="Alive", species="Human", type="Volunteer", gender="Male"
+        name="fake.name()",
+        status="Alive",
+        species="Human",
+        type="Volunteer",
+        gender="Male",
     )
     crud.character.create(db, char_in)
     char_in = CharacterCreate(
-        name="fake.name(2)", status="Alive", species="Human", type="Volunteer", gender="Male"
+        name="fake.name(2)",
+        status="Alive",
+        species="Human",
+        type="Volunteer",
+        gender="Male",
     )
     crud.character.create(db, char_in)
 
@@ -32,7 +44,7 @@ def test_get_multi_character(db):
         ({"status": "Alive"}, 4),
         ({"species": "Human"}, 4),
         ({"gender": "Female"}, 2),
-     ],
+    ],
 )
 def test_get_multi_character_with_filters(db, setup, test_input, expected):
     assert len(crud.character.get_multi_characters(db, **test_input)) == expected

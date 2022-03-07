@@ -1,6 +1,6 @@
 """create main tables
 Revision ID: 43659a23ea92
-Revises: 
+Revises:
 Create Date: 2022-02-18 13:24:38.668314
 """
 import sqlalchemy as sa

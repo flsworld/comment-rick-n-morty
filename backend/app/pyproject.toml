@@ -3,7 +3,8 @@ minversion = "6.0"
 addopts = "--spec --cov=app --cov-report html"
 
 [tool.black]
-line-length = 79
+target-version = ["py39"]
+line-length = 89
 include = '\.pyi?$'
 exclude = '''
 /(
@@ -12,8 +13,8 @@ exclude = '''
 )/
 '''
 
-[flake8]
-ignore = E203, E266, E501, W503, F403, F401
-max-line-length = 79
+[tool.flake8]
+ignore = ["E203", "E266", "E501", "W503", "F403", "F401"]
+max-line-length = 89
 max-complexity = 18
-select = B,C,E,F,W,T4,B9
+select = ["B","C","E","F","W","T4","B9"]

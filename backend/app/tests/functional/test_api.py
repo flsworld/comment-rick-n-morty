@@ -77,12 +77,12 @@ def test_read_characters_with_wrong_filters(client, field, value, values_set):
     assert response.status_code == 422
     content = response.json()
     assert content["detail"] == [
-            {
-                "loc": ["query", field],
-                "msg": f"value must be in {values_set}",
-                "type": "value_error",
-            }
-        ]
+        {
+            "loc": ["query", field],
+            "msg": f"value must be in {values_set}",
+            "type": "value_error",
+        }
+    ]
 
 
 def test_read_episodes_with_search(client, setup):

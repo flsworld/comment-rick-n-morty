@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     DATABASE_URL = config(
         "DATABASE_URL",
         cast=DatabaseURL,
-        default=f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}"
+        default=f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_SERVER}:{POSTGRES_PORT}/{POSTGRES_DB}",  # noqa: E501
     )
 
     FIRST_SUPERUSER = "friedrich@frederic.fred"

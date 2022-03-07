@@ -11,7 +11,6 @@ COMPARISON_OP = {"lte": operator.le, "gte": operator.ge}
 
 
 class CRUDEpisode(CRUDBase):
-
     def search(self, db: Session, obj_in: EpisodeSearch, skip: int = 0, limit: int = 10):
         criterion = []
         search_data = {k: v for (k, v) in obj_in.dict().items() if v}

@@ -1,5 +1,4 @@
-from .association_tables import CharacterEpisode
-from .character import Character
-from .comment import Comment
-from .episode import Episode
-from .user import User
+from .association_tables import CharacterEpisode  # noqa: F401
+from .character import Character  # noqa: F401
+from .comment import Comment  # noqa: F401
+from .episode import Episode  # noqa: F401

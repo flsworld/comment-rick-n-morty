@@ -34,7 +34,9 @@ def read_characters(
         fire_error_msg("species", CHARACTER_CHOICES["species"])
     if gender and gender not in CHARACTER_CHOICES["gender"]:
         fire_error_msg("gender", CHARACTER_CHOICES["gender"])
-    characters = crud.character.get_multi_characters(db, skip=skip, limit=limit, status=status, species=species, gender=gender)
+    characters = crud.character.get_multi_characters(
+        db, skip=skip, limit=limit, status=status, species=species, gender=gender
+    )
     return characters
 
 
