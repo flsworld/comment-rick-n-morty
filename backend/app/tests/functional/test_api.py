@@ -25,3 +25,16 @@ def test_create_comment(client):
     content = response.json()
     assert content["text"] == data["text"]
     assert "id" in content
+
+
+def test_read_characters_under_pagination(setup):
+    pass
+
+
+def test_read_characters_with_filters():
+    pass
+
+
+def test_read_episodes_with_search():
+    pass
+

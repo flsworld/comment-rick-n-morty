@@ -22,11 +22,11 @@ def test_gender_validator():
         CharacterSchema(species="Jesse")
 
 
-def test_valid_character_pydantic_model(fake):
+def test_valid_character_pydantic_model():
     status = random.choice(list(CHARACTER_CHOICES["status"]))
     species = random.choice(list(CHARACTER_CHOICES["species"]))
     gender = random.choice(list(CHARACTER_CHOICES["gender"]))
 
     assert CharacterSchema(
-        name=fake.name(), status=status, species=species, gender=gender
+        name="fake.name()", status=status, species=species, gender=gender
     )

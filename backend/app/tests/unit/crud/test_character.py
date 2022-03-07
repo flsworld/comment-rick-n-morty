@@ -4,22 +4,22 @@ from app import crud
 from app.schemas import CharacterCreate
 
 
-def test_get_character(db, fake):
+def test_get_character(db):
     char_in = CharacterCreate(
-        name=fake.name(), status="Alive", species="Human", type="Volunteer", gender="Male"
+        name="fake.name()", status="Alive", species="Human", type="Volunteer", gender="Male"
     )
     char = crud.character.create(db, char_in)
 
     assert crud.character.get(db, char.id)
 
 
-def test_get_multi_character(db, fake):
+def test_get_multi_character(db):
     char_in = CharacterCreate(
-        name=fake.name(), status="Alive", species="Human", type="Volunteer", gender="Male"
+        name="fake.name()", status="Alive", species="Human", type="Volunteer", gender="Male"
     )
     crud.character.create(db, char_in)
     char_in = CharacterCreate(
-        name=fake.name(), status="Alive", species="Human", type="Volunteer", gender="Male"
+        name="fake.name(2)", status="Alive", species="Human", type="Volunteer", gender="Male"
     )
     crud.character.create(db, char_in)
 
@@ -29,9 +29,9 @@ def test_get_multi_character(db, fake):
 @pytest.mark.parametrize(
     "test_input,expected",
     [
-        ({"status": "Alive"}, 2),
-        ({"species": "Poopybutthole"}, 1),
-        ({"gender": "Female"}, 1),
+        ({"status": "Alive"}, 4),
+        ({"species": "Human"}, 4),
+        ({"gender": "Female"}, 2),
      ],
 )
 def test_get_multi_character_with_filters(db, setup, test_input, expected):
