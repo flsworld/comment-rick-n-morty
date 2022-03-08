@@ -117,7 +117,7 @@ terminal, enter the following command
 ```
 
 4. You can make sure everything worked properly by opening a psql prompt and 
-making some SQL requests. 
+making some SQL queries. 
 
 _Close current shell on the web container or open a new tab/window in your shell_
 ```sh
@@ -140,16 +140,16 @@ See if everything's fine (non-empty table) with a raw SQL query
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Launch tests suite
-Run all tests with 
+Open a shell in the web container and run all tests with 
 ```sh
     scripts/run_tests.sh
 ```
-To see the coverage, open the following file `backend/htmlcov/index.html`
+After having launched the tests, it is possible to see the coverage. To do so, open the following file `backend/htmlcov/index.html`
 with your browser
 
 ### Install pre-commit
-In order to remain focus on logic during development, pre-commit - a useful tool
-upon which it is able to install hooks - has been used. In this project 
+In order to remain focus on logic during development while not wasting time with trivial style nitpicks, 
+pre-commit - a useful tool upon which it is able to install hooks - has been used. In this project 
 * black was used to format the code 
 * flake8 was used to check compliance with PEP8
 

@@ -37,6 +37,12 @@ def test_create_comment(client):
     assert "id" in content
 
 
+def test_retrieve_comment_from_character_and_episode(client, setup):
+    response = client.get(f"{settings.API_PREFIX}/comments/?character_id=1&episode_id=1")
+    content = response.json()
+    assert all(c["id"] for c in content)
+
+
 def test_read_characters_under_pagination(client, setup):
     response = client.get(f"{settings.API_PREFIX}/characters?skip=1&limit=2")
     assert response.status_code == 200
